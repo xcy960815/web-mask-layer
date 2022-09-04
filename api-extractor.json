@@ -1,7 +1,6 @@
-
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
-  "mainEntryPointFilePath": "./temp/maskLayer.d.ts",
+  "mainEntryPointFilePath": "./temp/web-mask-layer.d.ts",
   "bundledPackages": [],
   "compiler": {
     "tsconfigFilePath": "./tsconfig.json"

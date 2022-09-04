@@ -12,7 +12,7 @@ import livereload from 'rollup-plugin-livereload'
 
 const isProduction = process.env.NODE_ENV === 'production'
 export default {
-    input: './src/mask-layer.ts',
+    input: './src/web-mask-layer.ts',
     output: [
         {
             format: 'umd',
