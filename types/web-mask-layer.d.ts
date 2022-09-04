@@ -1,8 +1,7 @@
 export declare class MaskLayer {
+    /* 遮罩层节点 */
     private maskLayerElement;
-    /**
-     * 遮罩层队列*
-     */
+    /* 遮罩层队列 */
     readonly maskLayerQueue: Array<MaskLayerOptions>;
     /**
      * @desc 更新遮罩层内容

@@ -12,7 +12,14 @@ export default Vue.extend({
     //  创建一个遮罩层
     createMaskLayer() {
       const maskLayer = new MaskLayer();
-      maskLayer.createLoading("加载中...");
+      new Promise((resolve)=>{
+        maskLayer.createLoading("数据加载中");
+      }).then(()=>{
+        //  关闭遮罩层
+        maskLayer.closeLoading();
+      
+      })
+      
     }
   },
   mounted() {

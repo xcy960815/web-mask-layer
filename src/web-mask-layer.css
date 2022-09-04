@@ -1,4 +1,4 @@
-/* 遮罩层的样式 */
+/* 遮罩层根节点样式 */
 .web-mask-layer {
     position: fixed;
     top: 0;
@@ -12,8 +12,8 @@
     background-color: #000;
 }
 
-/* 遮罩层body */
-.web-loading-box {
+/* 遮罩层content */
+.web-mask-layer-content {
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 /* 遮罩层文本节点样式 */
-.web-text {
+.web-mask-layer-text {
     color: #409eff;
 }
 

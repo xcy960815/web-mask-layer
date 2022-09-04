@@ -1,29 +1,15 @@
 interface MaskLayerOptions {
     loadingText: string;
 }
+import "./web-mask-layer.css";
 export declare class MaskLayer {
+    private WEB_MASK_LAYER_CLASS_NAME;
+    private WEB_MASK_LAYER_CONTENT_CLASS_NAME;
+    private WEB_MASK_LAYER_TEXT_CLASS_NAME;
+    private WEB_MASK_LAYER_DOTTING_CLASS_NAME;
     private maskLayerElement;
-    /**
-     * 遮罩层队列*
-     */
     readonly maskLayerQueue: Array<MaskLayerOptions>;
-    /**
-     * @desc 更新遮罩层内容
-     * @param {MaskLayerOptions} maskLayerOptions 遮罩层配置项
-     * @return {void}
-     */
-    private uploadMaskLayerText;
-    /**
-     * @desc 创建或者更新遮罩层
-     * @return {void}
-     */
-    private uploadMaskLayer;
-    /**
-     * @desc 向遮罩层队列中添加记录
-     * @param {MaskLayerOptions} maskLayerOptions
-     * @return {void}
-     */
-    private addMaskLayerLayer;
+    private checkMaskLayer;
     /**
      * @desc 创建节点方法
      * @param {string} tagName
@@ -52,6 +38,6 @@ export declare class MaskLayer {
     /**
      * @desc 关闭遮罩层
      */
-    removeLoading(): void;
+    closeLoading(): void;
 }
 export {};
