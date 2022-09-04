@@ -2,3 +2,10 @@ node_modules/
 public/
 demo/
 .idea/
+vue.config.js
+tsconfig.json
+shims-vue.d.ts
+package-lock.json
+pnpm-lock.yaml
+src/
+example/
