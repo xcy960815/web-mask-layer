@@ -1,0 +1,81 @@
+/* 遮罩层的样式 */
+.web-mask-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    opacity: 0.5;
+    background-color: #000;
+}
+
+/* 遮罩层body */
+.web-loading-box {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* 遮罩层文本节点样式 */
+.web-text {
+    color: #409eff;
+}
+
+/* 遮罩层loading节点样式 */
+.web-mask-layer-dotting {
+    color: #409eff;
+    display: inline-block;
+    min-width: 2px;
+    min-height: 2px;
+    box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor;
+    -webkit-animation: dot 2s infinite step-start both;
+    animation: dot 2s infinite step-start both;
+    margin-left: 2px;
+}
+
+.web-mask-layer-dotting:before {
+    content: '...';
+}
+
+/* IE8 */
+.web-mask-layer-dotting::before {
+    content: '';
+}
+
+:root .web-mask-layer-dotting {
+    margin-right: 8px;
+}
+
+@-webkit-keyframes dot {
+    25% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow: 2px 0 currentColor;
+    }
+
+    75% {
+        box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+    }
+}
+
+@keyframes dot {
+    25% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow: 2px 0 currentColor;
+    }
+
+    75% {
+        box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+    }
+}
