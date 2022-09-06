@@ -192,7 +192,6 @@ export class WebMaskLayer {
      * @return {void}
      */
     public createLoading(maskLayerOption: MaskLayerOption | string): void {
-        console.log(maskLayerOption);
 
         // maskLayerOption做兼容处理
         if (typeof maskLayerOption === 'string') {
