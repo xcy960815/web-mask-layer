@@ -1,4 +1,4 @@
-import {Position} from "postcss";
+import { Position } from "postcss";
 
 export interface MaskLayerOption {
     text?: string // 显示在加载图标前面的加载文案
@@ -61,6 +61,11 @@ export class WebMaskLayer {
     /* 校验是否存在遮罩层 */
     private checkMaskLayer(): boolean {
         return !!this.maskLayerElement
+    }
+
+    /* 校验tart节点是否存在 maskLayerElement节点 */
+    private checkTargetHasMaskLayerElement(): boolean {
+        return this.target.contains(this.maskLayerElement!)
     }
 
     /**
@@ -165,15 +170,15 @@ export class WebMaskLayer {
 
     /**
      * @desc 移除遮罩层
+     * @return {void}
      */
     private removeLoadingElement = (): void => {
-        // 延迟300毫秒关闭
         if (this.checkMaskLayer()) {
             // 添加离开动画
             this.maskLayerElement?.classList.add(this.WEB_MASK_LAYER_LEAVE_CLASS_NAME)
             //延迟300毫秒移除遮罩层
             setTimeout(() => {
-                this.target.removeChild(this.maskLayerElement!)
+                this.checkTargetHasMaskLayerElement() && this.target.removeChild(this.maskLayerElement!)
                 this.maskLayerElement?.classList.remove(this.WEB_MASK_LAYER_LEAVE_CLASS_NAME)
                 this.makeTargetUnReactive()
                 this.resetProperty()
@@ -188,8 +193,8 @@ export class WebMaskLayer {
      */
     public createLoading(maskLayerOption?: MaskLayerOption | string): void {
         // maskLayerOption做兼容处理
-        maskLayerOption = typeof maskLayerOption === 'string' || maskLayerOption === undefined ? {text: maskLayerOption || "数据加载中"} : maskLayerOption
-        const {text, background, customClass, target, color, opacity} = maskLayerOption
+        maskLayerOption = typeof maskLayerOption === 'string' || maskLayerOption === undefined ? { text: maskLayerOption || "数据加载中" } : maskLayerOption
+        const { text, background, customClass, target, color, opacity } = maskLayerOption
         if (text) this.text = text
         if (background) this.background = background
         if (customClass) this.customClass = customClass
