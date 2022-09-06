@@ -22,6 +22,8 @@ export declare class WebMaskLayer {
     private customClass;
     private color;
     private opacity;
+    private static instance;
+    constructor();
     private getMaxZIndex;
     private checkMaskLayer;
     /**
@@ -34,6 +36,11 @@ export declare class WebMaskLayer {
      * @returns {void}
      */
     private makeTargetUnReactive;
+    /**
+     * @desc 还原属性
+     * @returns {void}
+     */
+    private resetProperty;
     /**
      * @desc 创建节点方法
      * @param {string} tagName

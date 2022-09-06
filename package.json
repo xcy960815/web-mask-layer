@@ -1,6 +1,6 @@
 {
     "name": "web-mask-layer",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "description": "一个简单、轻量级且可自定义的 Web 遮罩层",
     "main": "dist/web-mask-layer.umd.js",
     "module": "dist/web-mask-layer.esm.js",
@@ -23,7 +23,7 @@
     "bugs": {
         "url": "https://github.com/xcy960815/web-mask-layer.git/issues"
     },
-    "types": "typs/web-mask-layer.d.ts",
+    "types": "types/web-mask-layer.d.ts",
     "homepage": "https://github.com/xcy960815/web-mask-layer.git#readme",
     "devDependencies": {
         "@babel/core": "^7.16.7",

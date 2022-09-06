@@ -41,16 +41,17 @@ export class WebMaskLayer {
     private color: string = '#fff'
     /*遮罩层透明度*/
     private opacity: string = "0.5"
-    // private static instance: WebMaskLayer
 
-    // constructor() {
-    //     /* 多次实例化只返回第一次new的对象 */
-    //     if (WebMaskLayer.instance) {
-    //         return WebMaskLayer.instance
-    //     } else {
-    //         WebMaskLayer.instance = this
-    //     }
-    // }
+    private static instance: WebMaskLayer
+
+    constructor() {
+        /* 多次实例化只返回第一次new的对象 */
+        if (WebMaskLayer.instance) {
+            return WebMaskLayer.instance
+        } else {
+            WebMaskLayer.instance = this
+        }
+    }
 
     /* 获取页面中最大的z-index 使用reduce方法 */
     private getMaxZIndex(): number {
@@ -66,7 +67,6 @@ export class WebMaskLayer {
      * @desc 将target节点的属性变成 reactive属性
      * @returns {void}
      */
-
     private makeTargetReactive(): void {
         const target = this.target
         //  记录原来的position属性
@@ -80,6 +80,19 @@ export class WebMaskLayer {
      */
     private makeTargetUnReactive(): void {
         this.target.style.position = this.targetStyleReactive
+    }
+
+    /**
+     * @desc 还原属性
+     * @returns {void}
+     */
+    private resetProperty() {
+        this.text = '数据加载中'
+        this.target = document.body
+        this.background = '#000'
+        this.customClass = ''
+        this.color = '#fff'
+        this.opacity = "0.5"
     }
 
     /**
@@ -163,6 +176,7 @@ export class WebMaskLayer {
                 this.target.removeChild(this.maskLayerElement!)
                 this.maskLayerElement?.classList.remove(this.WEB_MASK_LAYER_LEAVE_CLASS_NAME)
                 this.makeTargetUnReactive()
+                this.resetProperty()
             }, 300)
         }
     }
