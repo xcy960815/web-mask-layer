@@ -26,6 +26,7 @@ export declare class WebMaskLayer {
     constructor();
     private getMaxZIndex;
     private checkMaskLayer;
+    private checkTargetHasMaskLayerElement;
     /**
      * @desc 将target节点的属性变成 reactive属性
      * @returns {void}
@@ -56,6 +57,7 @@ export declare class WebMaskLayer {
     private createLoadingElement;
     /**
      * @desc 移除遮罩层
+     * @return {void}
      */
     private removeLoadingElement;
     /**
