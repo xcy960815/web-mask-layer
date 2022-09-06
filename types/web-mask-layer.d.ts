@@ -65,7 +65,7 @@ export declare class WebMaskLayer {
      * @param {MaskLayerOption|string} maskLayerOption
      * @return {void}
      */
-    createLoading(maskLayerOption?: MaskLayerOption | string): void;
+    createLoading(maskLayerOption: MaskLayerOption | string): void;
     /**
      * @desc 关闭遮罩层
      * @returns {void}
