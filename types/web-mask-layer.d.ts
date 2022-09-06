@@ -1,46 +1,67 @@
-export declare class MaskLayer {
-    /* 遮罩层节点 */
+export declare interface MaskLayerOption {
+    text?: string;
+    target?: string | HTMLElement;
+    background?: string;
+    color?: string;
+    customClass?: string;
+    opacity?: string;
+}
+
+export declare class WebMaskLayer {
+    private WEB_MASK_LAYER_CLASS_NAME;
+    private WEB_MASK_LAYER_CONTENT_CLASS_NAME;
+    private WEB_MASK_LAYER_TEXT_CLASS_NAME;
+    private WEB_MASK_LAYER_DOTTING_CLASS_NAME;
+    private WEB_MASK_LAYER_ENTER_CLASS_NAME;
+    private WEB_MASK_LAYER_LEAVE_CLASS_NAME;
     private maskLayerElement;
-    /* 遮罩层队列 */
-    readonly maskLayerQueue: Array<MaskLayerOptions>;
+    private text;
+    private target;
+    private targetStyleReactive;
+    private background;
+    private customClass;
+    private color;
+    private opacity;
+    private getMaxZIndex;
+    private checkMaskLayer;
     /**
-     * @desc 更新遮罩层内容
-     * @param {MaskLayerOptions} maskLayerOptions 遮罩层配置项
-     * @return {void}
+     * @desc 将target节点的属性变成 reactive属性
+     * @returns {void}
      */
-    private uploadMaskLayerText;
+    private makeTargetReactive;
     /**
-     * @desc 创建或者更新遮罩层
-     * @return {void}
+     * @desc 将target节点的属性还原
+     * @returns {void}
      */
-    private uploadMaskLayer;
-    /**
-     * @desc 向遮罩层队列中添加记录
-     * @param {MaskLayerOptions} maskLayerOptions
-     * @return {void}
-     */
-    private addMaskLayerLayer;
+    private makeTargetUnReactive;
     /**
      * @desc 创建节点方法
      * @param {string} tagName
      * @param {string} className
-     * @param {string} innerText
      * @return HTMLElement
      * @private
      */
     private createElement;
     /**
      * @desc 创建遮罩层节点
-     * @param {MaskLayerOptions} maskLayerOptions
-     * @private
      * @return {void}
      */
     private createLoadingElement;
-    createLoading: (loadingText: string) => void;
-}
-
-declare interface MaskLayerOptions {
-    loadingText: string;
+    /**
+     * @desc 移除遮罩层
+     */
+    private removeLoadingElement;
+    /**
+     * @desc 创建遮罩层
+     * @param {MaskLayerOption|string} maskLayerOption
+     * @return {void}
+     */
+    createLoading(maskLayerOption?: MaskLayerOption | string): void;
+    /**
+     * @desc 关闭遮罩层
+     * @returns {void}
+     */
+    closeLoading(): void;
 }
 
 export { }
