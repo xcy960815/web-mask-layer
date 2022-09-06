@@ -191,9 +191,13 @@ export class WebMaskLayer {
      * @param {MaskLayerOption|string} maskLayerOption
      * @return {void}
      */
-    public createLoading(maskLayerOption?: MaskLayerOption | string): void {
+    public createLoading(maskLayerOption: MaskLayerOption | string): void {
+        console.log(maskLayerOption);
+
         // maskLayerOption做兼容处理
-        maskLayerOption = typeof maskLayerOption === 'string' || maskLayerOption === undefined ? { text: maskLayerOption || "数据加载中" } : maskLayerOption
+        if (typeof maskLayerOption === 'string') {
+            maskLayerOption = { text: maskLayerOption }
+        }
         const { text, background, customClass, target, color, opacity } = maskLayerOption
         if (text) this.text = text
         if (background) this.background = background

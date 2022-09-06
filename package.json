@@ -1,6 +1,6 @@
 {
     "name": "web-mask-layer",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "一个简单、轻量级且可自定义的 Web 遮罩层",
     "main": "dist/web-mask-layer.umd.js",
     "module": "dist/web-mask-layer.esm.js",
