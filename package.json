@@ -1,12 +1,12 @@
 {
     "name": "web-mask-layer",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "一款简单web端的遮罩层",
     "main": "dist/web-mask-layer.umd.js",
     "module": "dist/web-mask-layer.esm.js",
     "scripts": {
         "dev": "NODE_ENV=development ENV=daily rollup -c -w",
-        "build": "NODE_ENV=production ENV=prod rollup -c",
+        "build": "NODE_ENV=production ENV=prod rollup -c && api-extractor run && rm -rf ./temp",
         "build:ts": "api-extractor run && rm -rf ./temp",
         "link": "npm link && npm link web-mask-layer",
         "serve": "vue-cli-service serve"
@@ -21,10 +21,10 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/xcy960815/rollup-ts-template/issues"
+        "url": "https://github.com/xcy960815/web-mask-layer.git/issues"
     },
-    "types": "typing/index.d.ts",
-    "homepage": "https://github.com/xcy960815/rollup-ts-template#readme",
+    "types": "typs/web-mask-layer.d.ts",
+    "homepage": "https://github.com/xcy960815/web-mask-layer.git#readme",
     "devDependencies": {
         "@babel/core": "^7.16.7",
         "@microsoft/api-extractor": "^7.28.3",

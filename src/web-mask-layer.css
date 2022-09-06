@@ -1,15 +1,44 @@
+@keyframes web-mask-layer-leave {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes web-mask-layer-enter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
 /* 遮罩层根节点样式 */
 .web-mask-layer {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     outline: 0;
+}
+
+/*遮罩层移入动画*/
+.web-mask-layer-enter {
+    opacity: 0;
+    animation: web-mask-layer-enter 0.3s;
+}
+
+/*遮罩层移出动画*/
+.web-mask-layer-leave {
     opacity: 0.5;
-    background-color: #000;
+    animation: web-mask-layer-leave 0.3s;
 }
 
 /* 遮罩层content */
@@ -23,9 +52,9 @@
 }
 
 /* 遮罩层文本节点样式 */
-.web-mask-layer-text {
-    color: #409eff;
-}
+/*.web-mask-layer-text {*/
+/*    color: #fff;*/
+/*}*/
 
 /* 遮罩层loading节点样式 */
 .web-mask-layer-dotting {
