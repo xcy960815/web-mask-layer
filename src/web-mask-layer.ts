@@ -1,4 +1,3 @@
-import { Position } from "postcss";
 
 export interface MaskLayerOption {
     text?: string // 显示在加载图标前面的加载文案
@@ -41,15 +40,13 @@ export class WebMaskLayer {
     private color: string = '#fff'
     /*遮罩层透明度*/
     private opacity: string = "0.5"
-
     private static instance: WebMaskLayer
-
-    constructor() {
+    public static getInstance(): WebMaskLayer {
         /* 多次实例化只返回第一次new的对象 */
         if (WebMaskLayer.instance) {
             return WebMaskLayer.instance
         } else {
-            WebMaskLayer.instance = this
+            return WebMaskLayer.instance = new WebMaskLayer()
         }
     }
 
@@ -125,10 +122,10 @@ export class WebMaskLayer {
             element.style.zIndex = (this.getMaxZIndex() + 1).toString()
             // 添加入场动画
             element.classList.add(this.WEB_MASK_LAYER_ENTER_CLASS_NAME)
-            // 300ms后移除入场动画
+            // 100ms后移除入场动画
             setTimeout(() => {
                 element.classList.remove(this.WEB_MASK_LAYER_ENTER_CLASS_NAME)
-            }, 300)
+            }, 100)
         }
         // 处理dotting节点
         if (className === this.WEB_MASK_LAYER_DOTTING_CLASS_NAME) {
@@ -176,13 +173,13 @@ export class WebMaskLayer {
         if (this.checkMaskLayer()) {
             // 添加离开动画
             this.maskLayerElement?.classList.add(this.WEB_MASK_LAYER_LEAVE_CLASS_NAME)
-            //延迟300毫秒移除遮罩层
+            //延迟100毫秒移除遮罩层
             setTimeout(() => {
                 this.checkTargetHasMaskLayerElement() && this.target.removeChild(this.maskLayerElement!)
                 this.maskLayerElement?.classList.remove(this.WEB_MASK_LAYER_LEAVE_CLASS_NAME)
                 this.makeTargetUnReactive()
                 this.resetProperty()
-            }, 300)
+            }, 100)
         }
     }
 

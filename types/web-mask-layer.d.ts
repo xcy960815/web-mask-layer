@@ -23,7 +23,7 @@ export declare class WebMaskLayer {
     private color;
     private opacity;
     private static instance;
-    constructor();
+    static getInstance(): WebMaskLayer;
     private getMaxZIndex;
     private checkMaskLayer;
     private checkTargetHasMaskLayerElement;
