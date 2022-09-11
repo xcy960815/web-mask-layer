@@ -1,13 +1,12 @@
 ### web-mask-layer
 
-[//]: # ([![Build Status]&#40;https://travis-ci.org/lukeed/web-mask-layer.svg?branch=master&#41;]&#40;https://travis-ci.org/lukeed/web-mask-layer&#41;)
 
 > 一个简单、轻量级且可自定义的 Web 遮罩层
 
 ## 安装
 
 ``` 
-npm install --save web-mask-layer
+npm install web-mask-layer -S
 ```
 
 ### 使用
@@ -16,7 +15,9 @@ npm install --save web-mask-layer
 import {WebMaskLayer} from 'web-mask-layer';
 
 //创建遮罩层实例
-const webMaskLayer = new WebMaskLayer();
+// const webMaskLayer = new WebMaskLayer();
+// 支持单例模式 节省内存开销
+const webMaskLayer =  WebMaskLayer.getInstance();
 
 //创建遮罩层
 webMaskLayer.createLoading({
@@ -33,3 +34,15 @@ setTimeout(() => {
 }, 2000)
 
 ```
+
+### Options
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- | --- | --- | --- | --- |
+| text | 遮罩层文本 | string | - | 数据加载中 |
+| background | 遮罩层背景色 | string | - | #000 |
+| target | 遮罩层挂载的目标元素 | string | - | body |
+| color | 遮罩层文本颜色 | string | - | #fff |
+| opacity | 遮罩层透明度 | string | - | 0.5 |
+| customClass | 遮罩层自定义类名 | string | - | - |
+-------
