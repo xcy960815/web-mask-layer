@@ -1,4 +1,12 @@
-### web-mask-layer
+<p align="center"><font size="6"> web-mask-layer</font></p>
+    
+
+[![npm](https://img.shields.io/npm/v/web-mask-layer.svg)](https://www.npmjs.com/package/web-mask-layer)
+[![License](https://img.shields.io/npm/l/web-mask-layer.svg)](https://github.com/xcy960815/web-mask-layer)
+[![npm](https://img.shields.io/npm/dm/web-mask-layer.svg)](https://github.com/xcy960815/web-mask-layer)
+[![GitHub issues](https://img.shields.io/github/issues/xcy960815/web-mask-layer.svg)](https://github.com/xcy960815/web-mask-layer/issues)
+[![GitHub stars](https://img.shields.io/github/stars/xcy960815/web-mask-layer.svg?style=social&label=Stars)](https://github.com/xcy960815/web-mask-layer)
+[![GitHub forks](https://img.shields.io/github/forks/xcy960815/web-mask-layer.svg?style=social&label=Fork)](https://github.com/xcy960815/web-mask-layer)
 
 
 > 一个简单、轻量级且可自定义的 Web 遮罩层
