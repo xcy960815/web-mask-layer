@@ -1,4 +1,7 @@
 node_modules/
 public/
 dist/
-.idea/
+.DS_Store
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+.pnpmrc.json

@@ -1,48 +1,68 @@
-import typescript from 'rollup-plugin-typescript2'
-import {
-    babel
-} from '@rollup/plugin-babel'
-import del from 'rollup-plugin-delete'
-import {
-    terser
-} from 'rollup-plugin-terser'
-import postcss from 'rollup-plugin-postcss'
-import autoprefixer from 'autoprefixer'
-import livereload from 'rollup-plugin-livereload'
+const fs = require('fs')
+const path = require('path')
+const commonjs = require('@rollup/plugin-commonjs')
+const resolve = require('@rollup/plugin-node-resolve')
+const postcss = require('rollup-plugin-postcss')
+const typescript = require('@rollup/plugin-typescript')
+const { dts } = require('rollup-plugin-dts')
+const terser = require('@rollup/plugin-terser')
 
-const isProduction = process.env.NODE_ENV === 'production'
-export default {
-    input: './src/web-mask-layer.ts',
+const input = path.resolve(__dirname, 'src/index.ts')
+const distDir = path.resolve(__dirname, 'dist')
+const typesDir = path.resolve(__dirname, 'types')
+
+fs.rmSync(distDir, { recursive: true, force: true })
+fs.rmSync(typesDir, { recursive: true, force: true })
+fs.mkdirSync(distDir, { recursive: true })
+fs.mkdirSync(typesDir, { recursive: true })
+
+module.exports = [
+  {
+    input,
     output: [
-        {
-            format: 'umd',
-            file: 'dist/web-mask-layer.umd.js',
-            name: 'webMaskLayer',
-        },
-        {
-            format: 'es',
-            file: 'dist/web-mask-layer.esm.js',
-        },
+      {
+        file: path.join(distDir, 'web-mask-layer.es.js'),
+        format: 'es',
+      },
+      {
+        file: path.join(distDir, 'web-mask-layer.umd.js'),
+        format: 'umd',
+        name: 'WebMaskLayer',
+      },
+      {
+        file: path.join(distDir, 'web-mask-layer.umd.min.js'),
+        format: 'umd',
+        name: 'WebMaskLayer',
+        plugins: [terser()],
+      },
     ],
     plugins: [
-        isProduction && del({
-            targets: ['dist']
-        }),
-        isProduction && terser(),
-        babel({
-            exclude: 'node_modules/**',
-            babelHelpers: 'bundled',
-        }),
-        postcss({
-            plugins: [autoprefixer()],
-        }),
-        // 热更新
-        !isProduction && livereload(),
-
-        typescript({
-            exclude: 'node_modules/**',
-            useTsconfigDeclarationDir: true,
-            extensions: ['.js', '.ts', '.tsx'],
-        }),
+      resolve.nodeResolve({
+        extensions: ['.mjs', '.js', '.json', '.ts'],
+      }),
+      commonjs(),
+      postcss({
+        extract: path.join(distDir, 'web-mask-layer.css'),
+        minimize: true,
+      }),
+      typescript({
+        tsconfig: './tsconfig.rollup.json',
+      }),
     ],
-}
+  },
+  {
+    input,
+    output: [
+      {
+        file: path.join(typesDir, 'web-mask-layer.d.ts'),
+        format: 'es',
+      },
+    ],
+    external: [/\.css$/],
+    plugins: [
+      dts({
+        tsconfig: './tsconfig.rollup.json',
+      }),
+    ],
+  },
+]
