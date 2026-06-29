@@ -1,4 +1,4 @@
-<p align="center"><font size="6"> web-mask-layer</font></p>
+# web-mask-layer
 
 [![npm](https://img.shields.io/npm/v/web-mask-layer.svg)](https://www.npmjs.com/package/web-mask-layer)
 [![License](https://img.shields.io/npm/l/web-mask-layer.svg)](https://github.com/xcy960815/web-mask-layer)
@@ -7,48 +7,152 @@
 [![GitHub stars](https://img.shields.io/github/stars/xcy960815/web-mask-layer.svg?style=social&label=Stars)](https://github.com/xcy960815/web-mask-layer)
 [![GitHub forks](https://img.shields.io/github/forks/xcy960815/web-mask-layer.svg?style=social&label=Fork)](https://github.com/xcy960815/web-mask-layer)
 
-> 一个简单、轻量级且可自定义的 Web 遮罩层
+- Documentation: [https://xcy960815.github.io/web-mask-layer/](https://xcy960815.github.io/web-mask-layer/)
+- Online Demo: [https://xcy960815.github.io/web-mask-layer/guide/demo](https://xcy960815.github.io/web-mask-layer/guide/demo)
 
-## 安装
+`web-mask-layer` is a lightweight browser-side mask/layer library with a plain JavaScript API. It shows a loading overlay on the entire page or on a specific target element.
 
-```
+It is a pure vanilla-DOM library with zero framework dependency.
+
+## Features
+
+- Singleton pattern for efficient memory usage
+- Target any DOM element or the entire page body
+- Configurable text, background, color, opacity, and custom CSS class
+- Smooth enter/leave CSS animations
+- SSR-safe: no-ops when `window` or `document` is unavailable
+- TypeScript definitions included
+- Automatic z-index calculation to always appear on top
+- Supports updating text in-place without recreating the mask
+
+## Installation
+
+```bash
 npm install web-mask-layer -S
 ```
 
-### 使用
+```bash
+pnpm add web-mask-layer
+```
 
-```js
+## Quick Start
+
+Import the library:
+
+```ts
 import { WebMaskLayer } from 'web-mask-layer'
 
-//创建遮罩层实例
-// const webMaskLayer = new WebMaskLayer();
-// 支持单例模式 节省内存开销
-const webMaskLayer = WebMaskLayer.getInstance()
+const maskLayer = WebMaskLayer.getInstance()
 
-//创建遮罩层
-webMaskLayer.createLoading({
-  text: '数据加载中', // 遮罩层文本 默认为"数据加载中"
-  background: '#000', // 遮罩层背景色 默认为"#000"
-  target: '.web-mask-layer-demo', // 遮罩层挂载的目标元素 默认为body
-  color: '#fff', // 遮罩层文本颜色 默认为"#fff"
-  opacity: '0.5', // 遮罩层透明度 默认为"0.5"
-  customClass: 'web-mask-layer-demo', // 遮罩层自定义类名 默认为""
+maskLayer.createLoading({
+  text: 'Loading data',
+  background: '#000',
+  target: '.my-container',
+  color: '#fff',
+  opacity: '0.5',
 })
 
 setTimeout(() => {
-  webMaskLayer.closeLoading()
+  maskLayer.closeLoading()
 }, 2000)
 ```
 
-### Options
+Or import the stylesheet separately:
 
-| 参数        | 说明                 | 类型   | 可选值 | 默认值     |
-| ----------- | -------------------- | ------ | ------ | ---------- |
-| text        | 遮罩层文本           | string | -      | 数据加载中 |
-| background  | 遮罩层背景色         | string | -      | #000       |
-| target      | 遮罩层挂载的目标元素 | string | -      | body       |
-| color       | 遮罩层文本颜色       | string | -      | #fff       |
-| opacity     | 遮罩层透明度         | string | -      | 0.5        |
-| customClass | 遮罩层自定义类名     | string | -      | -          |
+```ts
+import 'web-mask-layer/style.css'
+```
 
----
+## Using It Outside Vue Apps
+
+`web-mask-layer` is pure vanilla DOM. It works in any browser-based project with zero framework dependency:
+
+```ts
+import { WebMaskLayer } from 'web-mask-layer'
+
+document.querySelector('#load-btn')?.addEventListener('click', () => {
+  WebMaskLayer.getInstance().createLoading({
+    text: 'Loading...',
+  })
+})
+```
+
+## CDN / UMD Example
+
+```html
+<script src="https://unpkg.com/web-mask-layer/dist/web-mask-layer.umd.min.js"></script>
+<script>
+  const maskLayer = window.WebMaskLayer.WebMaskLayer.getInstance()
+
+  maskLayer.createLoading({
+    text: 'Hello from UMD',
+  })
+
+  setTimeout(function () {
+    maskLayer.closeLoading()
+  }, 2000)
+</script>
+```
+
+## API
+
+### `WebMaskLayer.getInstance()`
+
+Returns the singleton mask layer manager.
+
+### `createLoading(options)`
+
+Creates a mask layer instance.
+
+```ts
+import type { MaskLayerOption } from 'web-mask-layer'
+```
+
+| Option        | Type                    | Default         | Description                                                      |
+| ------------- | ----------------------- | --------------- | ---------------------------------------------------------------- |
+| `text`        | `string`                | `"数据加载中"`  | Text displayed on the mask                                       |
+| `target`      | `string \| HTMLElement` | `document.body` | Target element to mount the mask on. CSS selector or HTMLElement |
+| `background`  | `string`                | `"#000"`        | Mask background color                                            |
+| `color`       | `string`                | `"#fff"`        | Text color                                                       |
+| `opacity`     | `string`                | `"0.5"`         | Mask opacity (0 to 1)                                            |
+| `customClass` | `string`                | `""`            | Additional custom CSS class name for the mask root element       |
+
+## Notes
+
+- This package is intended for browser usage.
+- It cannot function in a pure Node.js runtime because it depends on `window`, `document`, and DOM APIs.
+- In SSR applications, import is usually fine, but `createLoading()` and `closeLoading()` should only be called on the client side.
+- `createLoading()` supports a shorthand: pass a string directly as the text value.
+
+## Build Artifacts
+
+The published package currently includes:
+
+- `dist/web-mask-layer.es.js`: ESM build for modern bundlers
+- `dist/web-mask-layer.umd.js`: UMD build for script-tag or legacy integration
+- `dist/web-mask-layer.umd.min.js`: minified UMD build
+- `dist/web-mask-layer.css`: stylesheet
+
+Source maps and CommonJS output are intentionally not published.
+
+## Development
+
+```bash
+pnpm install
+pnpm run dev
+pnpm run check
+pnpm run build
+```
+
+## Project Structure
+
+- `src/components/web-mask-layer.ts`: core mask layer logic
+- `src/components/web-mask-layer.css`: component styles
+- `src/index.ts`: library entry
+- `src/App.vue`: local demo playground
+- `rollup.config.js`: Rollup build for library bundles and bundled declarations
+- `vite.config.mts`: Vite config for the demo app
+
+## License
+
+[MIT](./LICENSE)
